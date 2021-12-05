@@ -6,6 +6,7 @@ A simple Youtube blocker for Linux written in bash
 
 * Linux
 * Firefox browser
+* wmctrl
 * A teenager that needs to control Youtube screen time
 
 ## Install
