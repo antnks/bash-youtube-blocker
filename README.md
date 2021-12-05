@@ -25,7 +25,7 @@ screen -L -d -m ./monitor.sh
 
 ## Usage
 
-The script manages `/etc/hosts` file and point youtube domain names to loopback to clock access.
+The script manages `/etc/hosts` file and points youtube domain names to loopback to block access.
 
 The default screen time is starting from 12:00 and limitted to 1 hour of active watching.
 
