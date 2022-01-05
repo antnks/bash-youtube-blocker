@@ -49,9 +49,20 @@ do
 	fi
 
 	TITLE=`env DISPLAY=:0 XAUTHORITY=$XAUTH wmctrl -l -p | grep YouTube`
-	RDDCPU=`top -b -n 1 | grep RDD | awk '{ print $9 }'`
+	RDDCPUALL=`top -b -n 1 | grep RDD | awk '{ print $9 }'`
 
-	echo "TITLE: $TITLE RDDCPU: $RDDCPU"
+	# if there are multiple users logged, loop through all RDD processes
+	RDDCPU=""
+	for rdd in $RDDCPUALL
+	do
+		if [ "$rdd" != "0,0" ] && [ "$rdd" != "0.0" ]
+		then
+			RDDCPU=$rdd
+			break
+		fi
+	done
+
+	echo "TITLE: $TITLE RDDCPU: \"$RDDCPU\""
 
 	count=$(<$COUNT)
 	if [ -z "$count" ]
@@ -60,7 +71,7 @@ do
 	fi
 
 	# if title found and rddcpu not eq 0.0 - count++
-	if [ ! -z "$TITLE" ] && [ "$RDDCPU" != "0,0" ] && [ "$RDDCPU" != "0.0" ]
+	if [ ! -z "$TITLE" ] && [ ! -z "$RDDCPU" ]
 	then
 		if [ "$count" == "0" ]
 		then
