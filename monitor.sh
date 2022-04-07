@@ -27,6 +27,15 @@ do
 		hour=`date '+%H'`
 		if [ "$hour" -lt 12 ]
 		then
+			# if it is too early and unblocked - block it
+			isunblocked=`grep ^#.*youtube.* /etc/hosts`
+			if [ ! -z "$isunblocked" ]
+			then
+				echo "New day block"
+				./block.sh
+				echo BLOCKED | mail -s YOUTUBE_BLOCKER $EMAIL
+		        fi
+
 			#echo "too early"
 			sleep 5
 			continue
