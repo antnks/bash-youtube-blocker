@@ -79,6 +79,19 @@ do
 		count=0
 	fi
 
+	hour=`date '+%H'`
+	if [ "$count" == "0" ] && [ "$hour" -gt 20 ]
+	then
+		# if has not been used and it is too late - block it
+		isunblocked=`grep ^#.*youtube.* /etc/hosts`
+		if [ ! -z "$isunblocked" ]
+		then
+			echo "Evening block"
+			./block.sh
+			echo BLOCKED | mail -s YOUTUBE_BLOCKER $EMAIL
+		fi
+	fi
+
 	# if title found and rddcpu not eq 0.0 - count++
 	if [ ! -z "$TITLE" ] && [ ! -z "$RDDCPU" ]
 	then
