@@ -11,6 +11,10 @@ A simple Youtube blocker for Linux written in bash
 
 ## Install
 
+```
+apt-get install mailutils screen postfix
+```
+
 Create a dir `/root/youtube` and copy `*.sh` files there.
 
 Put `minutely.sh` into cron:
